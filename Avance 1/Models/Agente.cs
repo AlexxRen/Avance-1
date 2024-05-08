@@ -5,7 +5,6 @@ namespace Avance_1.Models
 {
     public class Agente
     {
-
         [Key]
         [MaxLength(5), MinLength(5)]
         public required string IdAgente { get; set; }
