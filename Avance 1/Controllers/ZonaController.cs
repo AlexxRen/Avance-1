@@ -26,7 +26,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Zona/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -66,7 +66,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Zona/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdZona,Descripcion_zona")] Zona zona)
+        public async Task<IActionResult> Edit(int id, [Bind("IdZona,Descripcion_zona")] Zona zona)
         {
             if (id != zona.IdZona)
             {
@@ -117,7 +117,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Zona/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Avance_1.Controllers
         // POST: Zona/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var zona = await _context.Zona.FindAsync(id);
             if (zona != null)
@@ -149,7 +149,7 @@ namespace Avance_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ZonaExists(string id)
+        private bool ZonaExists(int id)
         {
             return _context.Zona.Any(e => e.IdZona == id);
         }

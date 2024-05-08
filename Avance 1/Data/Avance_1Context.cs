@@ -14,11 +14,13 @@ namespace Avance_1.Data
         {
         }
 
-        public DbSet<Avance_1.Models.Agente> Agente { get; set; } = default!;
-        public DbSet<Avance_1.Models.Roles> Roles { get; set; } = default!;
+
         public DbSet<Avance_1.Models.Persona> Persona { get; set; } = default!;
         public DbSet<Avance_1.Models.Zona> Zona { get; set; } = default!;
         public DbSet<Avance_1.Models.CamECU911> CamECU911 { get; set; } = default!;
         public DbSet<Avance_1.Models.Siniestro> Siniestro { get; set; } = default!;
+        public DbSet<Avance_1.Models.Rol> Rol { get; set; } = default!;
+        public DbSet<Avance_1.Models.Agente> Agente { get; set; } = default!;
+        
     }
 }

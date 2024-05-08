@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Avance_1.Models.Roles>
+﻿@model IEnumerable<Avance_1.Models.Rol>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nivel_privilegio)
+                @Html.DisplayNameFor(model => model.Tipo_privilegio)
             </th>
             <th></th>
         </tr>
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nivel_privilegio)
+                @Html.DisplayFor(modelItem => item.Tipo_privilegio)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdRol">Edit</a> |

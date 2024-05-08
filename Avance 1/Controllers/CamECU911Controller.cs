@@ -26,7 +26,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: CamECU911/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -66,7 +66,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: CamECU911/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdCam,Ubicacion,IdZona")] CamECU911 camECU911)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCam,Ubicacion,IdZona")] CamECU911 camECU911)
         {
             if (id != camECU911.IdCam)
             {
@@ -117,7 +117,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: CamECU911/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Avance_1.Controllers
         // POST: CamECU911/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var camECU911 = await _context.CamECU911.FindAsync(id);
             if (camECU911 != null)
@@ -149,7 +149,7 @@ namespace Avance_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CamECU911Exists(string id)
+        private bool CamECU911Exists(int id)
         {
             return _context.CamECU911.Any(e => e.IdCam == id);
         }

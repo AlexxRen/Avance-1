@@ -27,7 +27,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Agente/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -49,8 +49,8 @@ namespace Avance_1.Controllers
         // GET: Agente/Create
         public IActionResult Create()
         {
-            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona");
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol");
+            ViewData["Personaid"] = new SelectList(_context.Persona, "IdPersona", "IdPersona");
+            ViewData["Rolid"] = new SelectList(_context.Rol, "IdRol", "IdRol");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAgente,Cargo,PersonaId,RolId")] Agente agente)
+        public async Task<IActionResult> Create([Bind("IdAgente,Cargo,Personaid,Rolid")] Agente agente)
         {
             if (ModelState.IsValid)
             {
@@ -67,13 +67,13 @@ namespace Avance_1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.PersonaId);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", agente.RolId);
+            ViewData["Personaid"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.Personaid);
+            ViewData["Rolid"] = new SelectList(_context.Rol, "IdRol", "IdRol", agente.Rolid);
             return View(agente);
         }
 
         // GET: Agente/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -85,8 +85,8 @@ namespace Avance_1.Controllers
             {
                 return NotFound();
             }
-            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.PersonaId);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", agente.RolId);
+            ViewData["Personaid"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.Personaid);
+            ViewData["Rolid"] = new SelectList(_context.Rol, "IdRol", "IdRol", agente.Rolid);
             return View(agente);
         }
 
@@ -95,7 +95,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdAgente,Cargo,PersonaId,RolId")] Agente agente)
+        public async Task<IActionResult> Edit(int id, [Bind("IdAgente,Cargo,Personaid,Rolid")] Agente agente)
         {
             if (id != agente.IdAgente)
             {
@@ -122,13 +122,13 @@ namespace Avance_1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.PersonaId);
-            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", agente.RolId);
+            ViewData["Personaid"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.Personaid);
+            ViewData["Rolid"] = new SelectList(_context.Rol, "IdRol", "IdRol", agente.Rolid);
             return View(agente);
         }
 
         // GET: Agente/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -150,7 +150,7 @@ namespace Avance_1.Controllers
         // POST: Agente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var agente = await _context.Agente.FindAsync(id);
             if (agente != null)
@@ -162,7 +162,7 @@ namespace Avance_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AgenteExists(string id)
+        private bool AgenteExists(int id)
         {
             return _context.Agente.Any(e => e.IdAgente == id);
         }

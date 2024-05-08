@@ -24,62 +24,70 @@ namespace Avance_1.Migrations
 
             modelBuilder.Entity("Avance_1.Models.Agente", b =>
                 {
-                    b.Property<string>("IdAgente")
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("IdAgente")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAgente"));
 
                     b.Property<string>("Cargo")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
 
-                    b.Property<string>("PersonaId")
-                        .IsRequired()
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("Personaid")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("RolId")
-                        .IsRequired()
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("Rolid")
+                        .HasColumnType("integer");
 
                     b.HasKey("IdAgente");
 
-                    b.HasIndex("PersonaId");
+                    b.HasIndex("Personaid");
 
-                    b.HasIndex("RolId");
+                    b.HasIndex("Rolid");
 
                     b.ToTable("Agente");
                 });
 
             modelBuilder.Entity("Avance_1.Models.CamECU911", b =>
                 {
-                    b.Property<string>("IdCam")
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("IdCam")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<string>("IdZona")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCam"));
+
+                    b.Property<int>("IdZona")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Ubicacion")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<int?>("ZonaIdZona")
+                        .HasColumnType("integer");
+
                     b.HasKey("IdCam");
+
+                    b.HasIndex("ZonaIdZona");
 
                     b.ToTable("CamECU911");
                 });
 
             modelBuilder.Entity("Avance_1.Models.Persona", b =>
                 {
-                    b.Property<string>("IdPersona")
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("IdPersona")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdPersona"));
 
                     b.Property<string>("Cedula")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<DateOnly>("Fecha_nacimiento")
                         .HasColumnType("date");
@@ -94,39 +102,44 @@ namespace Avance_1.Migrations
                     b.ToTable("Persona");
                 });
 
-            modelBuilder.Entity("Avance_1.Models.Roles", b =>
+            modelBuilder.Entity("Avance_1.Models.Rol", b =>
                 {
-                    b.Property<string>("IdRol")
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("IdRol")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdRol"));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Nivel_privilegio")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
-
                     b.Property<string>("Nombre_rol")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
+                    b.Property<string>("Tipo_privilegio")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)");
+
                     b.HasKey("IdRol");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Rol");
                 });
 
             modelBuilder.Entity("Avance_1.Models.Siniestro", b =>
                 {
-                    b.Property<string>("IdSiniestro")
-                        .HasColumnType("text");
+                    b.Property<int>("IdSiniestro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Property<string>("AgenteIdAgente")
-                        .HasColumnType("character varying(5)");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdSiniestro"));
+
+                    b.Property<int?>("AgenteIdAgente")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -135,21 +148,18 @@ namespace Avance_1.Migrations
                     b.Property<DateTime>("FechaSiniestro")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("IdAgente")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("IdAgente")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("IdZona")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("IdZona")
+                        .HasColumnType("integer");
 
                     b.Property<string>("NivelUrgencia")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ZonaIdZona")
-                        .IsRequired()
-                        .HasColumnType("character varying(5)");
+                    b.Property<int?>("ZonaIdZona")
+                        .HasColumnType("integer");
 
                     b.HasKey("IdSiniestro");
 
@@ -162,9 +172,11 @@ namespace Avance_1.Migrations
 
             modelBuilder.Entity("Avance_1.Models.Zona", b =>
                 {
-                    b.Property<string>("IdZona")
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
+                    b.Property<int>("IdZona")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdZona"));
 
                     b.Property<string>("Descripcion_zona")
                         .IsRequired()
@@ -180,19 +192,28 @@ namespace Avance_1.Migrations
                 {
                     b.HasOne("Avance_1.Models.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("PersonaId")
+                        .HasForeignKey("Personaid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Avance_1.Models.Roles", "Rol")
+                    b.HasOne("Avance_1.Models.Rol", "Rol")
                         .WithMany()
-                        .HasForeignKey("RolId")
+                        .HasForeignKey("Rolid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Persona");
 
                     b.Navigation("Rol");
+                });
+
+            modelBuilder.Entity("Avance_1.Models.CamECU911", b =>
+                {
+                    b.HasOne("Avance_1.Models.Zona", "Zona")
+                        .WithMany()
+                        .HasForeignKey("ZonaIdZona");
+
+                    b.Navigation("Zona");
                 });
 
             modelBuilder.Entity("Avance_1.Models.Siniestro", b =>
@@ -203,9 +224,7 @@ namespace Avance_1.Migrations
 
                     b.HasOne("Avance_1.Models.Zona", "Zona")
                         .WithMany()
-                        .HasForeignKey("ZonaIdZona")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ZonaIdZona");
 
                     b.Navigation("Agente");
 

@@ -1,21 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Avance_1.Models
 {
     public class Siniestro
     {
         [Key]
-        public required string IdSiniestro { get; set; }
-        public required string IdZona { get; set; }
+        public required int IdSiniestro { get; set; }
         public required DateTime FechaSiniestro { get; set; }
         public required string NivelUrgencia { get; set; }
         public required string Descripcion { get; set; }
-        public required string IdAgente { get; set; }
 
-        // Foreign key relationships (assuming you have similar models for other tables)
-        [ForeignKey("IdZona")]public required Zona Zona { get; set; }
-        [ForeignKey("IdZona")] public required Agente Agente { get; set; }
+        // Foreign key relationships
+        
+        public required int IdZona { get; set; }  
+        public Zona? Zona { get; set; }  
+
+       
+        public required int IdAgente { get; set; }
+        public Agente? Agente { get; set; }
     }
-
 }

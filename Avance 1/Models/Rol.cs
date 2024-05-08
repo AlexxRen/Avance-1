@@ -2,13 +2,13 @@
 
 namespace Avance_1.Models
 {
-    public class Roles
+    public class Rol
     {
         [Key]
-        [MaxLength(5), MinLength(5)] public required string IdRol { get; set; }
+        public required int IdRol { get; set; }
         [MaxLength(20)] public required string Nombre_rol { get; set; }
         [MaxLength(50)] public required string Description { get; set; }
-        [MaxLength(5)] public required string Nivel_privilegio { get; set; }
+        [MaxLength(5)]public required string Tipo_privilegio { get; set; }
 
     }
 }

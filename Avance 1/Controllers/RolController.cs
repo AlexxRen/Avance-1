@@ -10,85 +10,85 @@ using Avance_1.Models;
 
 namespace Avance_1.Controllers
 {
-    public class RolesController : Controller
+    public class RolController : Controller
     {
         private readonly Avance_1Context _context;
 
-        public RolesController(Avance_1Context context)
+        public RolController(Avance_1Context context)
         {
             _context = context;
         }
 
-        // GET: Roles
+        // GET: Rol
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Roles.ToListAsync());
+            return View(await _context.Rol.ToListAsync());
         }
 
-        // GET: Roles/Details/5
-        public async Task<IActionResult> Details(string id)
+        // GET: Rol/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.Roles
+            var rol = await _context.Rol
                 .FirstOrDefaultAsync(m => m.IdRol == id);
-            if (roles == null)
+            if (rol == null)
             {
                 return NotFound();
             }
 
-            return View(roles);
+            return View(rol);
         }
 
-        // GET: Roles/Create
+        // GET: Rol/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Roles/Create
+        // POST: Rol/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdRol,Nombre_rol,Description,Nivel_privilegio")] Roles roles)
+        public async Task<IActionResult> Create([Bind("IdRol,Nombre_rol,Description,Tipo_privilegio")] Rol rol)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(roles);
+                _context.Add(rol);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(roles);
+            return View(rol);
         }
 
-        // GET: Roles/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: Rol/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.Roles.FindAsync(id);
-            if (roles == null)
+            var rol = await _context.Rol.FindAsync(id);
+            if (rol == null)
             {
                 return NotFound();
             }
-            return View(roles);
+            return View(rol);
         }
 
-        // POST: Roles/Edit/5
+        // POST: Rol/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdRol,Nombre_rol,Description,Nivel_privilegio")] Roles roles)
+        public async Task<IActionResult> Edit(int id, [Bind("IdRol,Nombre_rol,Description,Tipo_privilegio")] Rol rol)
         {
-            if (id != roles.IdRol)
+            if (id != rol.IdRol)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Avance_1.Controllers
             {
                 try
                 {
-                    _context.Update(roles);
+                    _context.Update(rol);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RolesExists(roles.IdRol))
+                    if (!RolExists(rol.IdRol))
                     {
                         return NotFound();
                     }
@@ -113,45 +113,45 @@ namespace Avance_1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(roles);
+            return View(rol);
         }
 
-        // GET: Roles/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        // GET: Rol/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var roles = await _context.Roles
+            var rol = await _context.Rol
                 .FirstOrDefaultAsync(m => m.IdRol == id);
-            if (roles == null)
+            if (rol == null)
             {
                 return NotFound();
             }
 
-            return View(roles);
+            return View(rol);
         }
 
-        // POST: Roles/Delete/5
+        // POST: Rol/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var roles = await _context.Roles.FindAsync(id);
-            if (roles != null)
+            var rol = await _context.Rol.FindAsync(id);
+            if (rol != null)
             {
-                _context.Roles.Remove(roles);
+                _context.Rol.Remove(rol);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RolesExists(string id)
+        private bool RolExists(int id)
         {
-            return _context.Roles.Any(e => e.IdRol == id);
+            return _context.Rol.Any(e => e.IdRol == id);
         }
     }
 }

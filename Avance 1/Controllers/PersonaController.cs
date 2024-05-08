@@ -26,7 +26,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Persona/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -66,7 +66,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Persona/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdPersona,Nombres,Fecha_nacimiento,Cedula")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("IdPersona,Nombres,Fecha_nacimiento,Cedula")] Persona persona)
         {
             if (id != persona.IdPersona)
             {
@@ -117,7 +117,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Persona/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Avance_1.Controllers
         // POST: Persona/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var persona = await _context.Persona.FindAsync(id);
             if (persona != null)
@@ -149,7 +149,7 @@ namespace Avance_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonaExists(string id)
+        private bool PersonaExists(int id)
         {
             return _context.Persona.Any(e => e.IdPersona == id);
         }

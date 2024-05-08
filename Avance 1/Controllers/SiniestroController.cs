@@ -26,7 +26,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Siniestro/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -54,7 +54,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSiniestro,IdZona,FechaSiniestro,NivelUrgencia,Descripcion,IdAgente")] Siniestro siniestro)
+        public async Task<IActionResult> Create([Bind("IdSiniestro,FechaSiniestro,NivelUrgencia,Descripcion,IdZona,IdAgente")] Siniestro siniestro)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Siniestro/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdSiniestro,IdZona,FechaSiniestro,NivelUrgencia,Descripcion,IdAgente")] Siniestro siniestro)
+        public async Task<IActionResult> Edit(int id, [Bind("IdSiniestro,FechaSiniestro,NivelUrgencia,Descripcion,IdZona,IdAgente")] Siniestro siniestro)
         {
             if (id != siniestro.IdSiniestro)
             {
@@ -117,7 +117,7 @@ namespace Avance_1.Controllers
         }
 
         // GET: Siniestro/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +137,7 @@ namespace Avance_1.Controllers
         // POST: Siniestro/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var siniestro = await _context.Siniestro.FindAsync(id);
             if (siniestro != null)
@@ -149,7 +149,7 @@ namespace Avance_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SiniestroExists(string id)
+        private bool SiniestroExists(int id)
         {
             return _context.Siniestro.Any(e => e.IdSiniestro == id);
         }
