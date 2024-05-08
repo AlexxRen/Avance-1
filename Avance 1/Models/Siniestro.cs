@@ -14,8 +14,8 @@ namespace Avance_1.Models
         public required string IdAgente { get; set; }
 
         // Foreign key relationships (assuming you have similar models for other tables)
-        public required Zona Zona { get; set; }
-        public required Agente Agente { get; set; }
+        [ForeignKey("IdZona")]public required Zona Zona { get; set; }
+        [ForeignKey("IdZona")] public required Agente Agente { get; set; }
     }
 
 }

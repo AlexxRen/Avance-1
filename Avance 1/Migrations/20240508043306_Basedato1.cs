@@ -6,11 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Avance_1.Migrations
 {
     /// <inheritdoc />
-    public partial class Basedatos : Migration
+    public partial class Basedato1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "CamECU911",
+                columns: table => new
+                {
+                    IdCam = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
+                    Ubicacion = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    IdZona = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CamECU911", x => x.IdCam);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Persona",
                 columns: table => new
@@ -18,7 +31,7 @@ namespace Avance_1.Migrations
                     IdPersona = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
                     Nombres = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     Fecha_nacimiento = table.Column<DateOnly>(type: "date", nullable: false),
-                    Cedula = table.Column<int>(type: "integer", maxLength: 10, nullable: false)
+                    Cedula = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,46 +69,24 @@ namespace Avance_1.Migrations
                 columns: table => new
                 {
                     IdAgente = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    Descripcion = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    IdPersona = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    DesignioIdPersona = table.Column<string>(type: "character varying(5)", nullable: false),
-                    idRole = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    rolIdRol = table.Column<string>(type: "character varying(5)", nullable: false)
+                    Cargo = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    PersonaId = table.Column<string>(type: "character varying(5)", nullable: false),
+                    RolId = table.Column<string>(type: "character varying(5)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Agente", x => x.IdAgente);
                     table.ForeignKey(
-                        name: "FK_Agente_Persona_DesignioIdPersona",
-                        column: x => x.DesignioIdPersona,
+                        name: "FK_Agente_Persona_PersonaId",
+                        column: x => x.PersonaId,
                         principalTable: "Persona",
                         principalColumn: "IdPersona",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Agente_Roles_rolIdRol",
-                        column: x => x.rolIdRol,
+                        name: "FK_Agente_Roles_RolId",
+                        column: x => x.RolId,
                         principalTable: "Roles",
                         principalColumn: "IdRol",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CamECU911",
-                columns: table => new
-                {
-                    IdCam = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    Ubicacion = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    IdZona = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    Zona_designadaIdZona = table.Column<string>(type: "character varying(5)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CamECU911", x => x.IdCam);
-                    table.ForeignKey(
-                        name: "FK_CamECU911_Zona_Zona_designadaIdZona",
-                        column: x => x.Zona_designadaIdZona,
-                        principalTable: "Zona",
-                        principalColumn: "IdZona",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -103,58 +94,58 @@ namespace Avance_1.Migrations
                 name: "Siniestro",
                 columns: table => new
                 {
-                    IdSiniestro = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    Fecha_Siniestro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Nivel_Siniestro = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
-                    IdCam = table.Column<char>(type: "character(1)", nullable: false),
-                    CamdesignadaIdCam = table.Column<string>(type: "character varying(5)", nullable: true),
+                    IdSiniestro = table.Column<string>(type: "text", nullable: false),
+                    IdZona = table.Column<string>(type: "text", nullable: false),
+                    FechaSiniestro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    NivelUrgencia = table.Column<string>(type: "text", nullable: false),
+                    Descripcion = table.Column<string>(type: "text", nullable: false),
                     IdAgente = table.Column<string>(type: "text", nullable: false),
-                    Agente_designadoIdAgente = table.Column<string>(type: "character varying(5)", nullable: true)
+                    ZonaIdZona = table.Column<string>(type: "character varying(5)", nullable: false),
+                    AgenteIdAgente = table.Column<string>(type: "character varying(5)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Siniestro", x => x.IdSiniestro);
                     table.ForeignKey(
-                        name: "FK_Siniestro_Agente_Agente_designadoIdAgente",
-                        column: x => x.Agente_designadoIdAgente,
+                        name: "FK_Siniestro_Agente_AgenteIdAgente",
+                        column: x => x.AgenteIdAgente,
                         principalTable: "Agente",
                         principalColumn: "IdAgente");
                     table.ForeignKey(
-                        name: "FK_Siniestro_CamECU911_CamdesignadaIdCam",
-                        column: x => x.CamdesignadaIdCam,
-                        principalTable: "CamECU911",
-                        principalColumn: "IdCam");
+                        name: "FK_Siniestro_Zona_ZonaIdZona",
+                        column: x => x.ZonaIdZona,
+                        principalTable: "Zona",
+                        principalColumn: "IdZona",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agente_DesignioIdPersona",
+                name: "IX_Agente_PersonaId",
                 table: "Agente",
-                column: "DesignioIdPersona");
+                column: "PersonaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agente_rolIdRol",
+                name: "IX_Agente_RolId",
                 table: "Agente",
-                column: "rolIdRol");
+                column: "RolId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CamECU911_Zona_designadaIdZona",
-                table: "CamECU911",
-                column: "Zona_designadaIdZona");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Siniestro_Agente_designadoIdAgente",
+                name: "IX_Siniestro_AgenteIdAgente",
                 table: "Siniestro",
-                column: "Agente_designadoIdAgente");
+                column: "AgenteIdAgente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Siniestro_CamdesignadaIdCam",
+                name: "IX_Siniestro_ZonaIdZona",
                 table: "Siniestro",
-                column: "CamdesignadaIdCam");
+                column: "ZonaIdZona");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CamECU911");
+
             migrationBuilder.DropTable(
                 name: "Siniestro");
 
@@ -162,16 +153,13 @@ namespace Avance_1.Migrations
                 name: "Agente");
 
             migrationBuilder.DropTable(
-                name: "CamECU911");
+                name: "Zona");
 
             migrationBuilder.DropTable(
                 name: "Persona");
 
             migrationBuilder.DropTable(
                 name: "Roles");
-
-            migrationBuilder.DropTable(
-                name: "Zona");
         }
     }
 }

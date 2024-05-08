@@ -28,34 +28,24 @@ namespace Avance_1.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("character varying(5)");
 
-                    b.Property<string>("Descripcion")
+                    b.Property<string>("Cargo")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
 
-                    b.Property<string>("DesignioIdPersona")
+                    b.Property<string>("PersonaId")
                         .IsRequired()
                         .HasColumnType("character varying(5)");
 
-                    b.Property<string>("IdPersona")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
-
-                    b.Property<string>("idRole")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
-
-                    b.Property<string>("rolIdRol")
+                    b.Property<string>("RolId")
                         .IsRequired()
                         .HasColumnType("character varying(5)");
 
                     b.HasKey("IdAgente");
 
-                    b.HasIndex("DesignioIdPersona");
+                    b.HasIndex("PersonaId");
 
-                    b.HasIndex("rolIdRol");
+                    b.HasIndex("RolId");
 
                     b.ToTable("Agente");
                 });
@@ -76,13 +66,7 @@ namespace Avance_1.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<string>("Zona_designadaIdZona")
-                        .IsRequired()
-                        .HasColumnType("character varying(5)");
-
                     b.HasKey("IdCam");
-
-                    b.HasIndex("Zona_designadaIdZona");
 
                     b.ToTable("CamECU911");
                 });
@@ -139,35 +123,39 @@ namespace Avance_1.Migrations
             modelBuilder.Entity("Avance_1.Models.Siniestro", b =>
                 {
                     b.Property<string>("IdSiniestro")
-                        .HasMaxLength(5)
+                        .HasColumnType("text");
+
+                    b.Property<string>("AgenteIdAgente")
                         .HasColumnType("character varying(5)");
 
-                    b.Property<string>("Agente_designadoIdAgente")
-                        .HasColumnType("character varying(5)");
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<string>("CamdesignadaIdCam")
-                        .HasColumnType("character varying(5)");
-
-                    b.Property<DateTime>("Fecha_Siniestro")
+                    b.Property<DateTime>("FechaSiniestro")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("IdAgente")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<char>("IdCam")
-                        .HasColumnType("character(1)");
-
-                    b.Property<string>("Nivel_Siniestro")
+                    b.Property<string>("IdZona")
                         .IsRequired()
-                        .HasMaxLength(5)
+                        .HasColumnType("text");
+
+                    b.Property<string>("NivelUrgencia")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ZonaIdZona")
+                        .IsRequired()
                         .HasColumnType("character varying(5)");
 
                     b.HasKey("IdSiniestro");
 
-                    b.HasIndex("Agente_designadoIdAgente");
+                    b.HasIndex("AgenteIdAgente");
 
-                    b.HasIndex("CamdesignadaIdCam");
+                    b.HasIndex("ZonaIdZona");
 
                     b.ToTable("Siniestro");
                 });
@@ -190,47 +178,38 @@ namespace Avance_1.Migrations
 
             modelBuilder.Entity("Avance_1.Models.Agente", b =>
                 {
-                    b.HasOne("Avance_1.Models.Persona", "Designio")
+                    b.HasOne("Avance_1.Models.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("DesignioIdPersona")
+                        .HasForeignKey("PersonaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Avance_1.Models.Roles", "rol")
+                    b.HasOne("Avance_1.Models.Roles", "Rol")
                         .WithMany()
-                        .HasForeignKey("rolIdRol")
+                        .HasForeignKey("RolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Designio");
+                    b.Navigation("Persona");
 
-                    b.Navigation("rol");
-                });
-
-            modelBuilder.Entity("Avance_1.Models.CamECU911", b =>
-                {
-                    b.HasOne("Avance_1.Models.Zona", "Zona_designada")
-                        .WithMany()
-                        .HasForeignKey("Zona_designadaIdZona")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Zona_designada");
+                    b.Navigation("Rol");
                 });
 
             modelBuilder.Entity("Avance_1.Models.Siniestro", b =>
                 {
-                    b.HasOne("Avance_1.Models.Agente", "Agente_designado")
+                    b.HasOne("Avance_1.Models.Agente", "Agente")
                         .WithMany()
-                        .HasForeignKey("Agente_designadoIdAgente");
+                        .HasForeignKey("AgenteIdAgente");
 
-                    b.HasOne("Avance_1.Models.CamECU911", "Camdesignada")
+                    b.HasOne("Avance_1.Models.Zona", "Zona")
                         .WithMany()
-                        .HasForeignKey("CamdesignadaIdCam");
+                        .HasForeignKey("ZonaIdZona")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Agente_designado");
+                    b.Navigation("Agente");
 
-                    b.Navigation("Camdesignada");
+                    b.Navigation("Zona");
                 });
 #pragma warning restore 612, 618
         }
