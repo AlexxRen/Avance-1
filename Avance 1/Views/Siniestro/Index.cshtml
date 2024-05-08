@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Fecha_Siniestro)
+                @Html.DisplayNameFor(model => model.IdZona)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nivel_Siniestro)
+                @Html.DisplayNameFor(model => model.FechaSiniestro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdCam)
+                @Html.DisplayNameFor(model => model.NivelUrgencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdAgente)
@@ -31,13 +34,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Fecha_Siniestro)
+                @Html.DisplayFor(modelItem => item.IdZona)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nivel_Siniestro)
+                @Html.DisplayFor(modelItem => item.FechaSiniestro)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCam)
+                @Html.DisplayFor(modelItem => item.NivelUrgencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdAgente)

@@ -22,7 +22,8 @@ namespace Avance_1.Controllers
         // GET: Agente
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Agente.ToListAsync());
+            var avance_1Context = _context.Agente.Include(a => a.Persona).Include(a => a.Rol);
+            return View(await avance_1Context.ToListAsync());
         }
 
         // GET: Agente/Details/5
@@ -34,6 +35,8 @@ namespace Avance_1.Controllers
             }
 
             var agente = await _context.Agente
+                .Include(a => a.Persona)
+                .Include(a => a.Rol)
                 .FirstOrDefaultAsync(m => m.IdAgente == id);
             if (agente == null)
             {
@@ -46,6 +49,8 @@ namespace Avance_1.Controllers
         // GET: Agente/Create
         public IActionResult Create()
         {
+            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona");
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAgente,Descripcion,IdPersona,idRole")] Agente agente)
+        public async Task<IActionResult> Create([Bind("IdAgente,Cargo,PersonaId,RolId")] Agente agente)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace Avance_1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.PersonaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", agente.RolId);
             return View(agente);
         }
 
@@ -78,6 +85,8 @@ namespace Avance_1.Controllers
             {
                 return NotFound();
             }
+            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.PersonaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", agente.RolId);
             return View(agente);
         }
 
@@ -86,7 +95,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdAgente,Descripcion,IdPersona,idRole")] Agente agente)
+        public async Task<IActionResult> Edit(string id, [Bind("IdAgente,Cargo,PersonaId,RolId")] Agente agente)
         {
             if (id != agente.IdAgente)
             {
@@ -113,6 +122,8 @@ namespace Avance_1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PersonaId"] = new SelectList(_context.Persona, "IdPersona", "IdPersona", agente.PersonaId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "IdRol", "IdRol", agente.RolId);
             return View(agente);
         }
 
@@ -125,6 +136,8 @@ namespace Avance_1.Controllers
             }
 
             var agente = await _context.Agente
+                .Include(a => a.Persona)
+                .Include(a => a.Rol)
                 .FirstOrDefaultAsync(m => m.IdAgente == id);
             if (agente == null)
             {

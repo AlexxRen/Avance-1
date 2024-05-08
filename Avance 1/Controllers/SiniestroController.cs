@@ -54,7 +54,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSiniestro,Fecha_Siniestro,Nivel_Siniestro,IdCam,IdAgente")] Siniestro siniestro)
+        public async Task<IActionResult> Create([Bind("IdSiniestro,IdZona,FechaSiniestro,NivelUrgencia,Descripcion,IdAgente")] Siniestro siniestro)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IdSiniestro,Fecha_Siniestro,Nivel_Siniestro,IdCam,IdAgente")] Siniestro siniestro)
+        public async Task<IActionResult> Edit(string id, [Bind("IdSiniestro,IdZona,FechaSiniestro,NivelUrgencia,Descripcion,IdAgente")] Siniestro siniestro)
         {
             if (id != siniestro.IdSiniestro)
             {

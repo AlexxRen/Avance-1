@@ -10,22 +10,22 @@ using Avance_1.Models;
 
 namespace Avance_1.Controllers
 {
-    public class RoleController : Controller
+    public class RolesController : Controller
     {
         private readonly Avance_1Context _context;
 
-        public RoleController(Avance_1Context context)
+        public RolesController(Avance_1Context context)
         {
             _context = context;
         }
 
-        // GET: Role
+        // GET: Roles
         public async Task<IActionResult> Index()
         {
             return View(await _context.Roles.ToListAsync());
         }
 
-        // GET: Role/Details/5
+        // GET: Roles/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace Avance_1.Controllers
             return View(roles);
         }
 
-        // GET: Role/Create
+        // GET: Roles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Role/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace Avance_1.Controllers
             return View(roles);
         }
 
-        // GET: Role/Edit/5
+        // GET: Roles/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace Avance_1.Controllers
             return View(roles);
         }
 
-        // POST: Role/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace Avance_1.Controllers
             return View(roles);
         }
 
-        // GET: Role/Delete/5
+        // GET: Roles/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace Avance_1.Controllers
             return View(roles);
         }
 
-        // POST: Role/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)

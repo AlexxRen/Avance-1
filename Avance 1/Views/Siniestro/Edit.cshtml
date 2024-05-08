@@ -14,19 +14,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdSiniestro" />
             <div class="form-group">
-                <label asp-for="Fecha_Siniestro" class="control-label"></label>
-                <input asp-for="Fecha_Siniestro" class="form-control" />
-                <span asp-validation-for="Fecha_Siniestro" class="text-danger"></span>
+                <label asp-for="IdZona" class="control-label"></label>
+                <input asp-for="IdZona" class="form-control" />
+                <span asp-validation-for="IdZona" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Nivel_Siniestro" class="control-label"></label>
-                <input asp-for="Nivel_Siniestro" class="form-control" />
-                <span asp-validation-for="Nivel_Siniestro" class="text-danger"></span>
+                <label asp-for="FechaSiniestro" class="control-label"></label>
+                <input asp-for="FechaSiniestro" class="form-control" />
+                <span asp-validation-for="FechaSiniestro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCam" class="control-label"></label>
-                <input asp-for="IdCam" class="form-control" />
-                <span asp-validation-for="IdCam" class="text-danger"></span>
+                <label asp-for="NivelUrgencia" class="control-label"></label>
+                <input asp-for="NivelUrgencia" class="form-control" />
+                <span asp-validation-for="NivelUrgencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdAgente" class="control-label"></label>
