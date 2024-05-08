@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Avance_1.Models.Siniestro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha_Siniestro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nivel_Siniestro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAgente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_Siniestro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nivel_Siniestro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAgente)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdSiniestro">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdSiniestro">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdSiniestro">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
