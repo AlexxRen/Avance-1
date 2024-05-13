@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Avance_1.Migrations
 {
     [DbContext(typeof(Avance_1Context))]
-    [Migration("20240508092815_Basedatos")]
+    [Migration("20240513011839_Basedatos")]
     partial class Basedatos
     {
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace Avance_1.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAgente"));
 
-                    b.Property<string>("Cargo")
+                    b.Property<string>("Estado_Agente")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");

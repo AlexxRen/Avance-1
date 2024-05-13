@@ -52,6 +52,8 @@ namespace Avance_1.Controllers
             ViewData["Personaid"] = new SelectList(_context.Persona, "IdPersona", "IdPersona");
             ViewData["Rolid"] = new SelectList(_context.Rol, "IdRol", "IdRol");
             return View();
+
+
         }
 
         // POST: Agente/Create
@@ -59,7 +61,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAgente,Cargo,Personaid,Rolid")] Agente agente)
+        public async Task<IActionResult> Create([Bind("IdAgente,Estado_Agente,Personaid,Rolid")] Agente agente)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +97,7 @@ namespace Avance_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdAgente,Cargo,Personaid,Rolid")] Agente agente)
+        public async Task<IActionResult> Edit(int id, [Bind("IdAgente,Estado_Agente,Personaid,Rolid")] Agente agente)
         {
             if (id != agente.IdAgente)
             {

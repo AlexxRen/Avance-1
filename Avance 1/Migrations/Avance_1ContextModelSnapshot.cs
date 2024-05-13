@@ -30,7 +30,7 @@ namespace Avance_1.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdAgente"));
 
-                    b.Property<string>("Cargo")
+                    b.Property<string>("Estado_Agente")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");

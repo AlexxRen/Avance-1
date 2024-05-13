@@ -61,7 +61,7 @@ namespace Avance_1.Migrations
                 {
                     IdAgente = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Cargo = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    Estado_Agente = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
                     Personaid = table.Column<int>(type: "integer", nullable: false),
                     Rolid = table.Column<int>(type: "integer", nullable: false)
                 },
